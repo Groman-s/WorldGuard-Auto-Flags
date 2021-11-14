@@ -1,0 +1,6 @@
+name: WorldGuardAutoFlags
+main: com.goyanov.flags.auto.main.WorldGuardAutoFlags
+version: 1.0.0
+api-version: 1.13
+depend:
+  - WorldGuard
