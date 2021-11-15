@@ -1,2 +1,25 @@
+# WGAF currently supports:
+# 1) StateFlag (allow/deny)
+# 2) StringFlag(lol,XD,hi...)
+# 3) IntegerFlag(5,6...)
+# 4) DoubleFlag(4.7,0.5...)
+# 5) BooleanFlag(true/false)
+# ----------------------------------------------
+# For the string flags some replacers exist:
+# 1) %p - for an owner
+# 2) %n - for a region name
 auto-flags:
   - "pvp:allow"
+  - "greeting:&8&l| &bWelcome to &3%p&b's region named as &3%n"
+  - "heal-amount:20"
+  - "heal-delay:1"
+  - "heal-max-health:16.5"
+  - "notify-enter:true"
+
+# Min = 1 (sec). change this setting if you notice that your flags are not always set
+dalay-before-setting-flags: 2
+
+# Will players be notified when auto-flags set
+notify:
+  enabled: true
+  message: "&8&l| &eAuto-flags set in region &6%n"

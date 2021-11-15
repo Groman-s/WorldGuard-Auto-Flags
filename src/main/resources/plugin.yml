@@ -4,3 +4,10 @@ version: 1.0.0
 api-version: 1.13
 depend:
   - WorldGuard
+commands:
+  worldguardautoflags:
+    description: "§3Reload plugin's configs"
+    permission: WorldGuardAutoFlags.admin
+    permission-message: "§cYou can't do this!"
+    aliases:
+      - "wgaf"

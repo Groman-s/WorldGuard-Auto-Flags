@@ -26,7 +26,6 @@ public class RegionClaimEvent extends Event
     {
         return player;
     }
-
     public ProtectedRegion getRegion()
     {
         return region;

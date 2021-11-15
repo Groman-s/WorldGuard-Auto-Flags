@@ -22,23 +22,21 @@ public class CallingRegionClaimEvent implements Listener
     public void onClaim(final PlayerCommandPreprocessEvent e)
     {
         String cmd = e.getMessage(); // ~/rg claim test - Example
-        if (!cmd.startsWith("/rg claim ") && !cmd.startsWith("/region claim ")) return; // accept only ~/region claim, ~/rg claim
+        if (!cmd.startsWith("/rg claim ") && !cmd.startsWith("/region claim ")) return; // accept ~/region claim & ~/rg claim only
         String[] cmdParts = cmd.split(" "); // [/rg, claim, test]
         final Player p = e.getPlayer(); // who sent the command
         final String regionName = cmdParts[2]; // ~/rg claim ->[test]<-
-        World playerWorld = BukkitAdapter.adapt(p.getWorld()); // where is a player selection TODO заменить на выделенный игроком регион
+        World playerWorld = BukkitAdapter.adapt(p.getWorld()); // where the player creates a region
         final RegionManager regionManager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(playerWorld); // region manager of the world
         if (regionManager != null && regionManager.getRegion(regionName) != null) return; // if the region exists - return
+        long delay = WorldGuardAutoFlags.inst().getConfig().getLong("dalay-before-setting-flags") * 20; // delay before flags set
+        if (delay < 20) delay = 20; // minimum delay is 20
         Bukkit.getScheduler().scheduleSyncDelayedTask(WorldGuardAutoFlags.inst(), () ->
         {
             if (regionManager == null) return; // if null return
             ProtectedRegion region = regionManager.getRegion(regionName); // region by name
+            if (region == null) return; // if null return
             Bukkit.getPluginManager().callEvent(new RegionClaimEvent(p, region)); // call event
-            p.sendMessage("Регион захвачен. Его имя " + region.getId()); // TODO убрать
-            for (Map.Entry<Flag, Object> entry : WorldGuardAutoFlags.AUTO_FLAGS.entrySet())
-            {
-                region.setFlag(entry.getKey(), entry.getValue()); // set the flag
-            }
-        }, 20);
+        }, delay);
     }
 }
