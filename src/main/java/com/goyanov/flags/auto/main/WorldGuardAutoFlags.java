@@ -3,6 +3,7 @@ package com.goyanov.flags.auto.main;
 import com.goyanov.flags.auto.commands.CommandWGAF;
 import com.goyanov.flags.auto.events.AutoFlagsOnClaiming;
 import com.goyanov.flags.auto.events.CallingRegionClaimEvent;
+import com.goyanov.flags.auto.utils.Metrics;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.flags.*;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
@@ -89,5 +90,7 @@ public class WorldGuardAutoFlags extends JavaPlugin
         pm.registerEvents(new CallingRegionClaimEvent(), this);
 
         getCommand("worldguardautoflags").setExecutor(new CommandWGAF());
+
+        new Metrics(this, 13333);
     }
 }
