@@ -16,10 +16,15 @@ auto-flags:
   - "heal-max-health:16.5"
   - "notify-enter:true"
 
-# Min = 1 (sec). change this setting if you notice that your flags are not always set
-dalay-before-setting-flags: 2
+# Min = 1 (sec). Change this setting if you notice that your flags are not always set
+dalay-before-setting-flags: 3
 
 # Will players be notified when auto-flags set
 notify:
   enabled: true
   message: "&8&l| &eAuto-flags set in region &6%n"
+
+# Will the plugin use permissions for each flag?
+# Use WorldGuardAutoFlags.flags.<flag> for the certain flag. Example: WorldGuardAutoFlags.flags.pvp
+# Use WorldGuardAutoFlags.flags.* for all flags
+use-permissions: false

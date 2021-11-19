@@ -22,9 +22,11 @@ public class AutoFlagsOnClaiming implements Listener
         {
             p.sendMessage(WorldGuardAutoFlags.inst().getConfig().getString("notify.message").replace("&", "§").replace("%p", p.getName()).replace("%n", region.getId()));
         }
+        boolean usePerFlagPermissions = WorldGuardAutoFlags.inst().getConfig().getBoolean("use-permissions");
         for (Map.Entry<Flag, Object> entry : WorldGuardAutoFlags.AUTO_FLAGS.entrySet())
         {
             Flag flag = entry.getKey();
+            if (usePerFlagPermissions && !p.hasPermission("WorldGuardAutoFlags.flags." + flag.getName())) continue;
             Object value = entry.getValue();
             if (flag instanceof StringFlag)
             {

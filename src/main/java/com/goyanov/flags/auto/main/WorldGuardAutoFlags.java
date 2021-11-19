@@ -3,6 +3,7 @@ package com.goyanov.flags.auto.main;
 import com.goyanov.flags.auto.commands.CommandWGAF;
 import com.goyanov.flags.auto.events.AutoFlagsOnClaiming;
 import com.goyanov.flags.auto.events.CallingRegionClaimEvent;
+import com.goyanov.flags.auto.utils.AutoPluginUpdater;
 import com.goyanov.flags.auto.utils.Metrics;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.flags.*;
@@ -28,6 +29,8 @@ public class WorldGuardAutoFlags extends JavaPlugin
         File config = new File(getDataFolder() + File.separator + "config.yml");
         if (!config.exists()) saveDefaultConfig();
         else reloadConfig();
+
+        AutoPluginUpdater.update();
 
         FlagRegistry flagRegistry = WorldGuard.getInstance().getFlagRegistry();
 
